@@ -8,7 +8,7 @@
 
             <div class="row">
                 <div class="col-md-12 steps">
-                    <span class="step" [ngClass]="{'step-active': step >= 1}"><span class="number">1</span> Name &amp; Contact</span>
+                    <span class="step" [ngClass]="{'step-active': step >= 1}"><span class="number">1</span> Name/Contact</span>
                     <span class="step" [ngClass]="{'step-active': step >= 2}"><span class="number">2</span> Address</span>
                     <span class="step" [ngClass]="{'step-active': step >= 3}"><span class="number">3</span> Employment</span>
                     <span class="step" [ngClass]="{'step-active': step >= 4}"><span class="number">4</span> Submit</span>
@@ -54,7 +54,7 @@
                                             <label>Phone Number:* </label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input class="form-control" type="text" formControlName="Phone" mask="(000) 000-0000" [showMaskTyped]="true" />
+                                            <input class="form-control" type="text" formControlName="Phone" mask="(000) 000-0000" />
                                             <p class="error-message" *ngIf="registrationForm.get('step1').get('Phone').dirty && registrationForm.get('step1').get('Phone').errors">Please enter a valid Phone Number.</p>
                                         </div>
                                     </div>
@@ -67,10 +67,84 @@
                     
                                 </div>
                                 <div [hidden]="step != 2" [formGroup]="registrationForm.get('step2')">
-                                    
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Address 1:* </label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text" formControlName="Address1" />
+                                            <p class="error-message" *ngIf="registrationForm.get('step2').get('Address1').dirty && registrationForm.get('step2').get('Address1').errors">Please enter a valid Address 1.</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Address 2: </label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text" formControlName="Address2" />
+                                            <p class="error-message" *ngIf="registrationForm.get('step2').get('Address2').dirty && registrationForm.get('step2').get('Address2').errors">Please enter a valid Address 2.</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>City:* </label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text" formControlName="City" />
+                                            <p class="error-message" *ngIf="registrationForm.get('step2').get('City').dirty && registrationForm.get('step2').get('City').errors">Please enter a valid City.</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>State:* </label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <select formControlName="State" class="form-control" >
+                                                <option value=""></option>
+                                                <option *ngFor="let state of states" [ngValue]="state.abbreviation">{{state.name}}</option>
+                                            </select>
+                                            <p class="error-message" *ngIf="registrationForm.get('step2').get('State').dirty && registrationForm.get('step2').get('State').errors">Please select a State.</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Zip Code:* </label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text" formControlName="Zip" mask="00000" />
+                                            <p class="error-message" *ngIf="registrationForm.get('step2').get('Zip').dirty && registrationForm.get('step2').get('Zip').errors">Please enter a valid Zip Code.</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12" style="text-align: center;">
+                                            <button type="button" class="btn btn-secondary" (click)="validate()">Continue</button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div [hidden]="step != 3" [formGroup]="registrationForm.get('step3')">
-
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Job:* </label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text" formControlName="Job"/>
+                                            <p class="error-message" *ngIf="registrationForm.get('step3').get('Job').dirty && registrationForm.get('step3').get('Job').errors">Please enter a valid Job.</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Employer: </label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text" formControlName="Employer"/>
+                                            <p class="error-message" *ngIf="registrationForm.get('step3').get('Employer').dirty && registrationForm.get('step3').get('Employer').errors">Please enter a valid Employer.</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12" style="text-align: center;">
+                                            <button type="button" class="btn btn-secondary" (click)="validate()" [disabled]="submitting">{{submitting ? 'Submitting...' : 'Submit'}}</button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div [hidden]="step != 4" style="text-align: center;">
                                     <h4>Thank you, {{registrationForm.get('step1').get('FirstName').value}}.</h4>

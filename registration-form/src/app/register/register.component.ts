@@ -252,11 +252,7 @@ export class RegisterComponent implements OnInit {
 
   registrationForm: FormGroup;
 
-  stepControls: [
-    [
-      'FirstName'
-    ]
-  ]
+  submitting: boolean = false;
 
   constructor(
     public fb: FormBuilder,
@@ -276,10 +272,10 @@ export class RegisterComponent implements OnInit {
         Address2: [null, []],
         City: [null, [Validators.required]],
         State: [null, [Validators.required]],
-        Zip: [null, [Validators.required]],
+        Zip: [null, [Validators.required, Validators.minLength(5)]],
       }),
       step3: this.fb.group({
-        Employment: [null, [Validators.required]],
+        Job: [null, [Validators.required]],
         Employer: [null, []]
       })
         
@@ -304,8 +300,8 @@ export class RegisterComponent implements OnInit {
       if (this.registrationForm.get('step2').valid) {
         this.step = 3;
       }
-    } else if (this.step == 2) {
-      this.registrationForm.get('step3').get('Employment').markAsDirty();
+    } else if (this.step == 3) {
+      this.registrationForm.get('step3').get('Job').markAsDirty();
       this.registrationForm.get('step3').get('Employer').markAsDirty();
       if (this.registrationForm.get('step3').valid) {
         this.submitForm();
@@ -314,10 +310,12 @@ export class RegisterComponent implements OnInit {
   }
 
   submitForm() {
+    this.submitting = true;
     let data = this.registrationForm.getRawValue();
     this.mockService.postRegistration(data)
     .subscribe((data: any) => {
       this.step = 4;
+      this.submitting = false;
     })
   }
 
