@@ -1,0 +1,48 @@
+.container {
+    margin-top: 40px;
+}
+
+.card-body h2 {text-align: center; margin-bottom:20px;}
+
+.card-body label {text-align: right; display: block; padding-top: 5px;}
+
+@media screen and (max-width: 768px) {
+    .card-body label {text-align: left;}
+}
+
+.card-body select,
+.card-body input[type=text],
+.card-body input[type=email] {
+    margin-bottom: 20px;
+}
+
+.steps {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.step {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+.number {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    border: 1px solid black;
+    border-radius: 100px;
+}
+
+.step.step-active {
+    font-weight: bold;
+}
+
+.step.step-active .number {
+    color: white;
+    background-color: #333333;
+}
+
+.error-message {
+    color: red;
+    margin-top: -20px;
+}

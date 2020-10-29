@@ -1,0 +1,92 @@
+<div class="container">
+    <div class="card">
+
+        <div class="card-body">
+
+            
+            <h2>Register</h2>
+
+            <div class="row">
+                <div class="col-md-12 steps">
+                    <span class="step" [ngClass]="{'step-active': step >= 1}"><span class="number">1</span> Name &amp; Contact</span>
+                    <span class="step" [ngClass]="{'step-active': step >= 2}"><span class="number">2</span> Address</span>
+                    <span class="step" [ngClass]="{'step-active': step >= 3}"><span class="number">3</span> Employment</span>
+                    <span class="step" [ngClass]="{'step-active': step >= 4}"><span class="number">4</span> Submit</span>
+                </div>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <form [formGroup]="registrationForm">
+                                <div [hidden]="step != 1" [formGroup]="registrationForm.get('step1')">
+                
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>First Name:* </label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text" formControlName="FirstName" />
+                                            <p class="error-message" *ngIf="registrationForm.get('step1').get('FirstName').dirty && registrationForm.get('step1').get('FirstName').errors">Please enter a valid First Name.</p>
+                                        </div>
+                                    </div>
+                        
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Last Name:* </label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text" formControlName="LastName" />
+                                            <p class="error-message" *ngIf="registrationForm.get('step1').get('LastName').dirty && registrationForm.get('step1').get('LastName').errors">Please enter a valid Last Name.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Email Address:* </label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="email" formControlName="Email" />
+                                            <p class="error-message" *ngIf="registrationForm.get('step1').get('Email').dirty && registrationForm.get('step1').get('Email').errors">Please enter a valid Email Address.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Phone Number:* </label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text" formControlName="Phone" mask="(000) 000-0000" [showMaskTyped]="true" />
+                                            <p class="error-message" *ngIf="registrationForm.get('step1').get('Phone').dirty && registrationForm.get('step1').get('Phone').errors">Please enter a valid Phone Number.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12" style="text-align: center;">
+                                            <button type="button" class="btn btn-secondary" (click)="validate()">Continue</button>
+                                        </div>
+                                    </div>
+                    
+                                </div>
+                                <div [hidden]="step != 2" [formGroup]="registrationForm.get('step2')">
+                                    
+                                </div>
+                                <div [hidden]="step != 3" [formGroup]="registrationForm.get('step3')">
+
+                                </div>
+                                <div [hidden]="step != 4" style="text-align: center;">
+                                    <h4>Thank you, {{registrationForm.get('step1').get('FirstName').value}}.</h4>
+                                    <p>Your registration has been submitted.</p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            
+            
+            
+        </div>
+    </div>
+
+</div>
